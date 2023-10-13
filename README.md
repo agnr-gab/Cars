@@ -6,23 +6,23 @@ Este projeto é uma aplicação SpringBoot que fornece endpoints REST para reali
 ## Modelo de Dados
 
 ### Marca
-- `id`: Identificador único da marca.
-- `nome_marca`: Nome da marca.
+- `id`: Identificador único da marcaEntity.
+- `nome_marca`: Nome da marcaEntity.
 
 ### Carro
-- `id`: Identificador único do carro.
-- `timestamp_cadastro`: Data e hora de cadastro do carro.
-- `modelo_id`: Identificador do modelo associado.
-- `ano`: Ano de fabricação do carro.
-- `combustivel`: Tipo de combustível do carro.
-- `num_portas`: Número de portas do carro.
-- `cor`: Cor do carro.
+- `id`: Identificador único do carroEntity.
+- `timestamp_cadastro`: Data e hora de cadastro do carroEntity.
+- `modelo_id`: Identificador do modeloEntity associado.
+- `ano`: Ano de fabricação do carroEntity.
+- `combustivel`: Tipo de combustível do carroEntity.
+- `num_portas`: Número de portas do carroEntity.
+- `cor`: Cor do carroEntity.
 
 ### Modelo
-- `id`: Identificador único do modelo.
-- `marca_id`: Identificador da marca associada.
-- `nome`: Nome do modelo.
-- `valor_fipe`: Valor Fipe do modelo.
+- `id`: Identificador único do modeloEntity.
+- `marca_id`: Identificador da marcaEntity associada.
+- `nome`: Nome do modeloEntity.
+- `valor_fipe`: Valor Fipe do modeloEntity.
 
 ## Endpoints
 
@@ -35,13 +35,13 @@ Este projeto é uma aplicação SpringBoot que fornece endpoints REST para reali
   [
     {
       "id": 1,
-      "marca": "Ford",
+      "marcaEntity": "Ford",
       "nome": "Mustang",
       "valor_fipe": 100000.0
     },
     {
       "id": 2,
-      "marca": "Chevrolet",
+      "marcaEntity": "Chevrolet",
       "nome": "Cruze",
       "valor_fipe": 80000.0
     },
@@ -53,7 +53,7 @@ Este projeto é uma aplicação SpringBoot que fornece endpoints REST para reali
 - **URL**: `/carros`
 - **Descrição**: Permite criar, listar, atualizar e excluir carros.
 - **Métodos HTTP**:
-    - POST: Cria um novo carro.
+    - POST: Cria um novo carroEntity.
     - GET: Lista todos os carros.
 - **Formato de Resposta (Listar Carros)**:
   ```
@@ -84,14 +84,14 @@ Este projeto é uma aplicação SpringBoot que fornece endpoints REST para reali
 - **URL**: `/marcas`
 - **Descrição**: Permite criar, listar, atualizar e excluir marcas.
 - **Métodos HTTP**:
-    - POST: Cria uma nova marca.
+    - POST: Cria uma nova marcaEntity.
     - GET: Lista todas as marcas.
 
 ### CRUD de Modelos
 - **URL**: `/modelos`
 - **Descrição**: Permite criar, listar, atualizar e excluir modelos.
 - **Métodos HTTP**:
-    - POST: Cria um novo modelo.
+    - POST: Cria um novo modeloEntity.
     - GET: Lista todos os modelos.
 
 ## Estrutura de Código e Organização
