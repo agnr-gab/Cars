@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Modelo {
+public class ModeloEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "marca_id")
-    private Marca marca;
+    private MarcaEntity marcaEntity;
     private String nome;
     private double valorFipe;
 

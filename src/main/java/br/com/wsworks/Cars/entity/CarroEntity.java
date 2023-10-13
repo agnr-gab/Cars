@@ -12,7 +12,7 @@ import java.security.Timestamp;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Carro {
+public class CarroEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Carro {
 
     @ManyToOne
     @JoinColumn(name = "modelo_id")
-    private Modelo modelo;
+    private ModeloEntity modeloEntity;
     private int ano;
     private String combustivel;
     private int numPortas;
