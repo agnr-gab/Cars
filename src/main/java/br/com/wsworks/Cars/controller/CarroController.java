@@ -2,12 +2,15 @@ package br.com.wsworks.Cars.controller;
 
 import br.com.wsworks.Cars.dto.CarroRequestDTO;
 import br.com.wsworks.Cars.dto.CarroResponseDTO;
-import br.com.wsworks.Cars.entity.Carro;
+import br.com.wsworks.Cars.entity.CarroEntity;
+import br.com.wsworks.Cars.mapper.CarroMapper;
 import br.com.wsworks.Cars.service.CarroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/carros")
@@ -16,33 +19,55 @@ public class CarroController {
 
     @Autowired
     private CarroService carroService;
+    @Autowired
+    private CarroMapper carroMapper;
 
     @PostMapping
     public ResponseEntity<CarroResponseDTO> criarCarro(@RequestBody CarroRequestDTO carroRequestDTO) {
-        Carro carro = new Carro();
-        carro.setTimestampCadastro(carroRequestDTO.getTimestampCadastro());
+        CarroEntity carroEntity = new CarroEntity();
+        carroEntity.setTimestampCadastro(carroRequestDTO.getTimestampCadastro());
 
-        Carro novoCarro = carroService.criarCarro(carroRequestDTO);
+        CarroEntity novoCarroEntity = carroService.criarCarro(carroRequestDTO);
         CarroResponseDTO carroResponseDTO = new CarroResponseDTO();
-        carroResponseDTO.setId(novoCarro.getId());
+        carroResponseDTO.setId(novoCarroEntity.getId());
 
         return new ResponseEntity<>(carroResponseDTO, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CarroResponseDTO> obterCarro(@PathVariable Long id) {
-        Carro carro = carroService.obterCarroPorId(id);
+        CarroResponseDTO carroResponseDTO1 = carroService.obterCarroPorId(id);
 
-        if (carro != null) {
-            // Mapear a entidade para a DTO de resposta
+        if (carroResponseDTO1 != null) {
+
             CarroResponseDTO carroResponseDTO = new CarroResponseDTO();
-            carroResponseDTO.setId(carro.getId());
-            // Mapear outros campos da entidade para a DTO de resposta.
+            carroResponseDTO.setId(carroResponseDTO1.getId());
 
             return ResponseEntity.ok(carroResponseDTO);
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CarroResponseDTO>> listarCarros() {
+        List<CarroResponseDTO> carros = carroService.listarCarros();
+        return ResponseEntity.ok(carros);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CarroEntity> atualizarCarro(@PathVariable Long id, @RequestBody CarroRequestDTO carroRequestDTO) {
+        CarroEntity carroAtualizado = carroService.atualizarCarro(id, carroRequestDTO);
+        if (carroAtualizado != null) {
+            return ResponseEntity.ok(carroAtualizado);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirCarro(@PathVariable Long id) {
+        carroService.excluirCarro(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
