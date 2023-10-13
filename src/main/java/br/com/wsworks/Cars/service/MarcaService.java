@@ -1,7 +1,7 @@
 package br.com.wsworks.Cars.service;
 
 import br.com.wsworks.Cars.dto.MarcaRequestDTO;
-import br.com.wsworks.Cars.entity.Marca;
+import br.com.wsworks.Cars.entity.MarcaEntity;
 import br.com.wsworks.Cars.repository.MarcaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,17 +14,17 @@ public class MarcaService {
     @Autowired
     private MarcaRepository marcaRepository;
 
-    public Marca criarMarca(MarcaRequestDTO marcaRequestDTO) {
-        Marca marca = new Marca();
-        marca.setNomeMarca(marcaRequestDTO.getNomeMarca());
-        return marcaRepository.save(marca);
+    public MarcaEntity criarMarca(MarcaRequestDTO marcaRequestDTO) {
+        MarcaEntity marcaEntity = new MarcaEntity();
+        marcaEntity.setNomeMarca(marcaRequestDTO.getNomeMarca());
+        return marcaRepository.save(marcaEntity);
     }
 
-    public Marca obterMarcaPorId(Long id) {
+    public MarcaEntity obterMarcaPorId(Long id) {
         return marcaRepository.findById(id).orElse(null);
     }
 
-    public List<Marca> listarTodasAsMarcas() {
+    public List<MarcaEntity> listarTodasAsMarcas() {
         return marcaRepository.findAll();
     }
 }
